@@ -72,8 +72,8 @@ void fillVector(std::vector<Car*>& vpCars, unsigned NUM_CARS)
 void setVectorData(std::vector<Car*>& vpCars, unsigned minMpg, unsigned maxMpg)
 {
      // Mersenne Twister random number generator
-    std::mt19937 mt {};
-    std::uniform_int_distribution<unsigned> mpgRange { minMpg, maxMpg };
+    static std::mt19937 mt {};
+    static std::uniform_int_distribution<unsigned> mpgRange { minMpg, maxMpg };
 
     for (Car* pCar : vpCars)
     {
