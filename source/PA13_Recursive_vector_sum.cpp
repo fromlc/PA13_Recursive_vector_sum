@@ -3,6 +3,7 @@
 //------------------------------------------------------------------------------
 #include "Car.h"
 
+#include <algorithm>
 #include <iostream>
 #include <random>
 #include <string>
@@ -23,6 +24,18 @@ const std::string NAME_PREFIX = "RX-7";
 //------------------------------------------------------------------------------
 void fillVector(std::vector<Car*>& vpCars, unsigned nCars);
 void setVectorData(std::vector<Car*>& vpCars, unsigned minMpg, unsigned maxMpg);
+void sortVector(std::vector<Car*>& vpCars);
+void displayVector(std::vector<Car*>& vpCars);
+//unsigned rSumVectorElements(std::vector<Car*>& vpCars);
+//void displayAverage(std::vector<Car*>& vpCars);
+
+//------------------------------------------------------------------------------
+// comparison function for sorting Car instances by mpg in descending order
+//------------------------------------------------------------------------------
+bool compareCars(const Car* pCar1, const Car* pCar2)
+{
+    return pCar1->getMpg() > pCar2->getMpg();
+}
 
 //------------------------------------------------------------------------------
 // entry point 
@@ -33,6 +46,9 @@ int main()
 
     fillVector(vw.vpCars, NUM_CARS);
     setVectorData(vw.vpCars, MIN_MPG, MAX_MPG);
+    sortVector(vw.vpCars);
+    displayVector(vw.vpCars);
+    //rSumVectorElements(vw.vpCars);
 
     std::cout << "Hello World!\n";
 }
@@ -48,7 +64,6 @@ void fillVector(std::vector<Car*>& vpCars, unsigned NUM_CARS)
     }
 }
 
-
 //------------------------------------------------------------------------------
 // generate random mpg values for Car instances in passed vector
 //------------------------------------------------------------------------------
@@ -61,5 +76,24 @@ void setVectorData(std::vector<Car*>& vpCars, unsigned minMpg, unsigned maxMpg)
     for (auto pCar : vpCars)
     {
         pCar->setMpg(mpgRange(mt));
+    }
+}
+
+//------------------------------------------------------------------------------
+// sort passed vector of Car pointers by mpg in descending order
+//------------------------------------------------------------------------------
+void sortVector(std::vector<Car*>& vpCars)
+{
+    std::sort(vpCars.begin(), vpCars.end(), compareCars);
+}
+
+//------------------------------------------------------------------------------
+// display vector elements
+//------------------------------------------------------------------------------
+void displayVector(std::vector<Car*>& vpCars)
+{
+    for (auto pCar : vpCars)
+    {
+        std::cout << *pCar << "\n";
     }
 }
