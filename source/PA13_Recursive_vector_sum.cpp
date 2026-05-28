@@ -71,8 +71,8 @@ void fillVector(std::vector<Car*>& vpCars, unsigned NUM_CARS)
 //------------------------------------------------------------------------------
 void setVectorData(std::vector<Car*>& vpCars, unsigned minMpg, unsigned maxMpg)
 {
-     // Mersenne Twister random number generator
-    static std::mt19937 mt {};
+     // seeded Mersenne Twister random number generator
+    static std::mt19937 mt { std::random_device{}() };
     static std::uniform_int_distribution<unsigned> mpgRange { minMpg, maxMpg };
 
     for (Car* pCar : vpCars)
@@ -118,6 +118,9 @@ unsigned rSumVectorElements(std::vector<Car*>& vpCars, size_t n)
 //------------------------------------------------------------------------------
 void displayAverage(std::vector<Car*>& vpCars)
 {
+    unsigned mpgSum = rSumVectorElements(vpCars, vpCars.size());
+    float mpgAvg = static_cast<float>(mpgSum) / vpCars.size();
+
     std::cout << std::fixed << "\nAverage mpg: " << std::setprecision(2)
-        << rSumVectorElements(vpCars, vpCars.size()) / vpCars.size() << "\n";
+        << mpgAvg << "\n";
 }
