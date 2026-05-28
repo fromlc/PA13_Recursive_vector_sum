@@ -1,9 +1,11 @@
 //------------------------------------------------------------------------------
 // PA13_Recursive_vector_sum.cpp 
 //------------------------------------------------------------------------------
-#include "Car.h"
+#include "Car.hpp"
 
 #include <algorithm>
+#include <iomanip>
+#include <ios>
 #include <iostream>
 #include <random>
 #include <string>
@@ -17,7 +19,7 @@ const size_t NUM_CARS = 10;
 const unsigned MIN_MPG = 11;
 const unsigned MAX_MPG = 49;
 
-const std::string NAME_PREFIX = "RX-7";
+const std::string NAME_PREFIX = "RX-";
 
 //------------------------------------------------------------------------------
 // local function prototypes
@@ -26,8 +28,8 @@ void fillVector(std::vector<Car*>& vpCars, unsigned nCars);
 void setVectorData(std::vector<Car*>& vpCars, unsigned minMpg, unsigned maxMpg);
 void sortVector(std::vector<Car*>& vpCars);
 void displayVector(std::vector<Car*>& vpCars);
-//unsigned rSumVectorElements(std::vector<Car*>& vpCars);
-//void displayAverage(std::vector<Car*>& vpCars);
+unsigned rSumVectorElements(std::vector<Car*>& vpCars, size_t n);
+void displayAverage(std::vector<Car*>& vpCars);
 
 //------------------------------------------------------------------------------
 // comparison function for sorting Car instances by mpg in descending order
@@ -48,9 +50,9 @@ int main()
     setVectorData(vw.vpCars, MIN_MPG, MAX_MPG);
     sortVector(vw.vpCars);
     displayVector(vw.vpCars);
-    //rSumVectorElements(vw.vpCars);
+    displayAverage(vw.vpCars);
 
-    std::cout << "Hello World!\n";
+    std::cout << "\nHappy motoring!\n";
 }
 
 //------------------------------------------------------------------------------
@@ -73,7 +75,7 @@ void setVectorData(std::vector<Car*>& vpCars, unsigned minMpg, unsigned maxMpg)
     std::mt19937 mt {};
     std::uniform_int_distribution<unsigned> mpgRange { minMpg, maxMpg };
 
-    for (auto pCar : vpCars)
+    for (Car* pCar : vpCars)
     {
         pCar->setMpg(mpgRange(mt));
     }
@@ -92,8 +94,30 @@ void sortVector(std::vector<Car*>& vpCars)
 //------------------------------------------------------------------------------
 void displayVector(std::vector<Car*>& vpCars)
 {
-    for (auto pCar : vpCars)
+    std::cout << "Cars in descending MPG order:\n\n";
+
+    for (const Car* pCar : vpCars)
     {
         std::cout << *pCar << "\n";
     }
+}
+
+//------------------------------------------------------------------------------
+// recursively calculate sum of mpg values for passed vector elements
+//------------------------------------------------------------------------------
+unsigned rSumVectorElements(std::vector<Car*>& vpCars, size_t n)
+{
+    if (n == 0)
+        return 0;
+
+    return vpCars[n - 1]->getMpg() + rSumVectorElements(vpCars, n - 1);
+}
+
+//------------------------------------------------------------------------------
+// display average mpg for Car instances in passed vector
+//------------------------------------------------------------------------------
+void displayAverage(std::vector<Car*>& vpCars)
+{
+    std::cout << std::fixed << "\nAverage mpg: " << std::setprecision(2)
+        << rSumVectorElements(vpCars, vpCars.size()) / vpCars.size() << "\n";
 }
