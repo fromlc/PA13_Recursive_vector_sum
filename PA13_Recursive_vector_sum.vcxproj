@@ -22,7 +22,7 @@
     <ClCompile Include="source\PA13_Recursive_vector_sum.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\Car.h" />
+    <ClInclude Include="source\Car.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>

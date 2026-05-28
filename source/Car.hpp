@@ -19,27 +19,35 @@ private:
     unsigned mpg;       // miles per gallon
     std::string name;
 
-    friend std::ostream& operator<<(std::ostream& os, const Car& c)
-    {
-        os << c.name << " (" << c.mpg << " mpg)";
-        return os;
-    }
-
 public:
+    // constructors
     Car() : mpg(0), name("Car") { }
-    Car(const std::string& _name) : mpg(0), name(_name)
-    { }
+    Car(const std::string& _name) : mpg(0), name(_name) { }
 
+    // getters and setters
     unsigned getMpg() const { return mpg; }
     void setMpg(unsigned _mpg) { mpg = _mpg; }
 
     const std::string& getName() const { return name; }
     void setName(const std::string& _name) { name = _name; }
 
+    // overload comparison operators for sorting by mpg
     bool operator<(const Car& rhs) const
     {
-        return name < rhs.name;
+        return mpg < rhs.mpg;
     }
+
+    bool operator>(const Car& rhs) const
+    {
+        return mpg > rhs.mpg;
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const Car& c)
+    {
+        os << c.name << " gets " << c.mpg << " mpg.";
+        return os;
+    }
+
 };
 
 //------------------------------------------------------------------------------
