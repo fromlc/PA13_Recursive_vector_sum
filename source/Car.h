@@ -33,6 +33,9 @@ public:
     unsigned getMpg() const { return mpg; }
     void setMpg(unsigned _mpg) { mpg = _mpg; }
 
+    const std::string& getName() const { return name; }
+    void setName(const std::string& _name) { name = _name; }
+
     bool operator<(const Car& rhs) const
     {
         return name < rhs.name;
