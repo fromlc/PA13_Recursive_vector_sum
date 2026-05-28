@@ -34,7 +34,7 @@ void displayAverage(std::vector<Car*>& vpCars);
 //------------------------------------------------------------------------------
 // comparison function for sorting Car instances by mpg in descending order
 //------------------------------------------------------------------------------
-bool compareCars(const Car* pCar1, const Car* pCar2)
+static bool compareCars(const Car* pCar1, const Car* pCar2)
 {
     return pCar1->getMpg() > pCar2->getMpg();
 }
