@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PA13_Recursive_vector_sum.cpp">
+    <ClCompile Include="source\PA13_Recursive_vector_sum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
