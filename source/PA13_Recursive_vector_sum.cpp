@@ -62,7 +62,7 @@ void fillVector(std::vector<Car*>& vpCars, unsigned NUM_CARS)
 {
     for (size_t i = 0; i < NUM_CARS; ++i)
     {
-        vpCars.push_back(new Car(NAME_PREFIX + std::to_string(i)));
+        vpCars.push_back(new Car(NAME_PREFIX + std::to_string(i + 1)));
     }
 }
 
