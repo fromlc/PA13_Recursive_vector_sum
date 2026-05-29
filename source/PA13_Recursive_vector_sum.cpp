@@ -118,6 +118,12 @@ unsigned rSumVectorElements(std::vector<Car*>& vpCars, size_t n)
 //------------------------------------------------------------------------------
 void displayAverage(std::vector<Car*>& vpCars)
 {
+    if (vpCars.empty())
+    {
+        std::cout << "\nNo cars, can't calculate average mpg.\n";
+        return;
+    }
+
     unsigned mpgSum = rSumVectorElements(vpCars, vpCars.size());
     float mpgAvg = static_cast<float>(mpgSum) / vpCars.size();
 
