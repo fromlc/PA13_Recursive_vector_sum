@@ -24,12 +24,14 @@ const std::string NAME_PREFIX = "RX-";
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
-void fillVector(std::vector<Car*>& vpCars, unsigned nCars);
-void setVectorData(std::vector<Car*>& vpCars, unsigned minMpg, unsigned maxMpg);
-void sortVector(std::vector<Car*>& vpCars);
-void displayVector(std::vector<Car*>& vpCars);
-unsigned rSumVectorElements(std::vector<Car*>& vpCars, size_t n);
-void displayAverage(std::vector<Car*>& vpCars);
+typedef std::vector<Car*> PCarVector;
+
+void fillVector(PCarVector& vpCars, unsigned nCars);
+void setVectorData(PCarVector& vpCars, unsigned minMpg, unsigned maxMpg);
+void sortVector(PCarVector& vpCars);
+void displayVector(PCarVector& vpCars);
+unsigned rSumVectorElements(PCarVector& vpCars, size_t n);
+void displayAverage(PCarVector& vpCars);
 
 //------------------------------------------------------------------------------
 // comparison function for sorting Car instances by mpg in descending order
@@ -58,7 +60,7 @@ int main()
 //------------------------------------------------------------------------------
 // generate Car instances with names and append the pointers to the vector
 //------------------------------------------------------------------------------
-void fillVector(std::vector<Car*>& vpCars, unsigned NUM_CARS)
+void fillVector(PCarVector& vpCars, unsigned NUM_CARS)
 {
     for (size_t i = 0; i < NUM_CARS; ++i)
     {
@@ -69,7 +71,7 @@ void fillVector(std::vector<Car*>& vpCars, unsigned NUM_CARS)
 //------------------------------------------------------------------------------
 // generate random mpg values for Car instances in passed vector
 //------------------------------------------------------------------------------
-void setVectorData(std::vector<Car*>& vpCars, unsigned minMpg, unsigned maxMpg)
+void setVectorData(PCarVector& vpCars, unsigned minMpg, unsigned maxMpg)
 {
      // seeded Mersenne Twister random number generator
     static std::mt19937 mt { std::random_device{}() };
@@ -84,7 +86,7 @@ void setVectorData(std::vector<Car*>& vpCars, unsigned minMpg, unsigned maxMpg)
 //------------------------------------------------------------------------------
 // sort passed vector of Car pointers by mpg in descending order
 //------------------------------------------------------------------------------
-void sortVector(std::vector<Car*>& vpCars)
+void sortVector(PCarVector& vpCars)
 {
     std::sort(vpCars.begin(), vpCars.end(), compareCars);
 }
@@ -92,7 +94,7 @@ void sortVector(std::vector<Car*>& vpCars)
 //------------------------------------------------------------------------------
 // display vector elements
 //------------------------------------------------------------------------------
-void displayVector(std::vector<Car*>& vpCars)
+void displayVector(PCarVector& vpCars)
 {
     std::cout << "Cars in descending MPG order:\n\n";
 
@@ -105,7 +107,7 @@ void displayVector(std::vector<Car*>& vpCars)
 //------------------------------------------------------------------------------
 // recursively calculate sum of mpg values for passed vector elements
 //------------------------------------------------------------------------------
-unsigned rSumVectorElements(std::vector<Car*>& vpCars, size_t n)
+unsigned rSumVectorElements(PCarVector& vpCars, size_t n)
 {
     if (n == 0)
         return 0;
@@ -116,7 +118,7 @@ unsigned rSumVectorElements(std::vector<Car*>& vpCars, size_t n)
 //------------------------------------------------------------------------------
 // display average mpg for Car instances in passed vector
 //------------------------------------------------------------------------------
-void displayAverage(std::vector<Car*>& vpCars)
+void displayAverage(PCarVector& vpCars)
 {
     if (vpCars.empty())
     {
