@@ -65,5 +65,7 @@ public:
     {
         for (Car* pCar : vpCars)
             delete pCar;
+
+        vpCars.clear();
     }
 };
